@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KRISHICYCLE - Organic Fertilizer Guide & Marketplace (Manual)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", "Noto Sans Devanagari", sans-serif;
+        background-color: #fdfbf8;
+        color: #4a4a4a;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+      }
+      .nav-link {
+        transition: color 0.3s, transform 0.1s;
+      }
+      .nav-link:hover {
+        color: #388e3c;
+        transform: translateY(-1px);
+      }
+      .step-btn.active {
+        background-color: #2c5f2d;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+          0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+      .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+          0 4px 6px -4px rgb(0 0 0 / 0.1);
+      }
+      .lang-btn {
+        transition: all 0.2s ease-in-out;
+      }
+      .lang-btn.active {
+        color: #2c5f2d;
+        font-weight: 800;
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body class="bg-[#FDFBF8]">
+    <header
+      class="bg-[#FDFBF8]/95 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm"
+    >
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex items-center">
+            <svg
+              class="w-8 h-8 text-[#2C5F2D] mr-2"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M12 2a10 10 0 0 0-4.9 1.34c.5-1.4.38-3.05-.22-4.14M12 2a10 10 0 0 1 4.9 1.34c-.5-1.4-.38-3.05.22-4.14"
+              />
+              <circle cx="12" cy="12" r="10" />
+              <path d="M16 8c-1.5-1-4-1-6 0" />
+              <path d="M12 12c-1.5 1-4 1-6 0" />
+              <path d="M18 13c-1.5 1-4 1-6 0" />
+              <path d="M12 12v6" />
+              <path d="M12 12l4-4" />
+              <path d="M12 12l-4 4" />
+              <path d="M12 12c1.5-1 4-1 6 0" />
+            </svg>
+            <span class="font-extrabold text-3xl text-gray-800"
+              >KrishiCycle.Ai</span
+            >
+          </div>
+
+          <div class="hidden md:flex items-center space-x-6">
+            <a
+              href="#problem"
+              class="nav-link text-gray-600 px-3 py-2 text-sm font-semibold"
+              data-translate-key="nav_overview"
+              >Overview</a
+            >
+            <a
+              href="#marketplace-sell"
+              class="nav-link text-gray-600 px-3 py-2 text-sm font-semibold"
+              data-translate-key="nav_marketplace"
+              >Marketplace</a
+            >
+            <a
+              href="#recipe"
+              class="nav-link text-gray-600 px-3 py-2 text-sm font-semibold"
+              data-translate-key="nav_recipe"
+              >Recipe Guide</a
+            >
+            <a
+              href="#process"
+              class="nav-link text-gray-600 px-3 py-2 text-sm font-semibold"
+              data-translate-key="nav_process"
+              >Process Guide</a
+            >
+            <a
+              href="#impact"
+              class="nav-link text-gray-600 px-3 py-2 text-sm font-semibold"
+              data-translate-key="nav_impact"
+              >Impact</a
+            >
+          </div>
+
+          <div class="flex items-center">
+            <div id="language-switcher" class="mr-2 md:mr-4">
+  <button
+    onclick="switchLanguage('en')"
+    class="lang-btn text-sm font-semibold p-1 md:p-2"
+  >
+    EN
+  </button>
+  <span class="text-gray-300">|</span>
+  <button
+    onclick="switchLanguage('hi')"
+    class="lang-btn text-sm font-semibold p-1 md:p-2"
+  >
+    HI
+  </button>
+</div>
+            <a
+              href="#"
+              onclick="alertMessage(translations[currentLanguage].userProfileAlert)"
+              class="text-gray-700 hover:text-[#388E3C] transition-colors p-2 rounded-full hover:bg-gray-100"
+              aria-label="User Profile"
+            >
+              <i class="fas fa-user-circle text-2xl"></i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="hero" class="py-20 md:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1
+            class="text-4xl md:text-6xl font-extrabold tracking-tight text-[#2C5F2D]"
+            data-translate-key="hero_title"
+          >
+            Turning Waste into Wealth.
+          </h1>
+          <p
+            class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600"
+            data-translate-key="hero_subtitle"
+          >
+            An Organic Fertilizer Assistant to empower communities, heal the
+            planet, and foster a circular economy.
+          </p>
+          <a
+            href="#marketplace-sell"
+            class="mt-8 inline-block bg-[#2C5F2D] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-[#388E3C] transition-colors transform hover:scale-105"
+            data-translate-key="hero_button"
+            >Start the Cycle</a
+          >
+        </div>
+      </section>
+
+      <section
+        id="problem"
+        class="py-16 bg-white border-t border-b border-gray-100"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="text-3xl font-bold text-gray-800"
+              data-translate-key="problem_title"
+            >
+              The Challenge and Our Innovative Solution
+            </h2>
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start"
+          >
+            <div
+              class="bg-red-50 p-6 rounded-xl border border-red-200 shadow-md"
+            >
+              <h3
+                class="text-2xl font-semibold text-red-800 mb-4"
+                data-translate-key="problem_section1_title"
+              >
+                The Problems We Face
+              </h3>
+              <ul class="space-y-3 text-red-700">
+                <li class="flex items-start">
+                  <span class="mr-2 mt-1 text-lg">❌</span
+                  ><span data-translate-key="problem_1"
+                    ><b>Massive Bio-Waste:</b> Tons of green waste, manure, and
+                    leaves are discarded daily.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2 mt-1 text-lg">❌</span
+                  ><span data-translate-key="problem_2"
+                    ><b>Harmful Fertilizers:</b> Artificial fertilizers are
+                    expensive, degrade soil, and pollute water.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2 mt-1 text-lg">❌</span
+                  ><span data-translate-key="problem_3"
+                    ><b>Knowledge Gap:</b> Lack of accessible knowledge on
+                    effective organic composting.</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="bg-green-50 p-6 rounded-xl border border-green-200 shadow-md"
+            >
+              <h3
+                class="text-2xl font-semibold text-green-800 mb-4"
+                data-translate-key="solution_section_title"
+              >
+                The Krishicycle Solution
+              </h3>
+              <ul class="space-y-3 text-green-700">
+                <li class="flex items-start">
+                  <span class="mr-2 mt-1 text-lg">✅</span
+                  ><span data-translate-key="solution_1"
+                    ><b>Simple Guidance:</b> Step-by-step instructions and
+                    recipe tools to turn local waste into valuable organic
+                    fertilizer.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-2 mt-1 text-lg">✅</span
+                  ><span data-translate-key="solution_2"
+                    ><b>Manual Marketplace:</b> Input data to instantly see a
+                    simulated listing displayed for buyers.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="recipe"
+        class="py-16 bg-white border-t border-b border-gray-100"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2
+            class="text-3xl font-bold text-gray-800 text-center mb-4"
+            data-translate-key="recipe_title"
+          >
+            Create Your Custom Compost Recipe
+          </h2>
+          <p
+            class="text-lg text-gray-500 text-center mb-12"
+            data-translate-key="recipe_subtitle"
+          >
+            Select your available ingredients for a tailored guide.
+          </p>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div
+              class="bg-gray-50 p-8 rounded-xl shadow-lg border border-gray-200 lg:col-span-1"
+            >
+              <h3
+                class="text-2xl font-semibold text-gray-700 mb-6"
+                data-translate-key="recipe_step1"
+              >
+                1. Select available ingredients:
+              </h3>
+
+              <form id="waste-form">
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+                >
+                  <div
+                    class="p-4 bg-green-100/50 rounded-lg border border-green-200"
+                  >
+                    <h4
+                      class="font-bold text-lg text-[#2C5F2D] mb-3"
+                      data-translate-key="recipe_greens_title"
+                    >
+                      Greens (Nitrogen-Rich)
+                    </h4>
+                    <div class="space-y-2 text-gray-700">
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Fruit & Veggie Scraps"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green1"
+                          >Fruit & Veggie Scraps</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Coffee Grounds"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green2"
+                          >Coffee Grounds</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Tea Bags/Leaves"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green3"
+                          >Tea Bags/Leaves</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Grass Clippings (Fresh)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green4"
+                          >Grass Clippings (Fresh)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Manure (Cow, Goat, Poultry)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green5"
+                          >Manure (Cow, Goat, Poultry)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Weeds (No seeds)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green6"
+                          >Weeds (No seeds)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Seaweed/Kelp"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_green7"
+                          >Seaweed/Kelp</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+
+                  <div
+                    class="p-4 bg-yellow-100/50 rounded-lg border border-yellow-200"
+                  >
+                    <h4
+                      class="font-bold text-lg text-yellow-800 mb-3"
+                      data-translate-key="recipe_browns_title"
+                    >
+                      Browns (Carbon-Rich)
+                    </h4>
+                    <div class="space-y-2 text-gray-700">
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Dry Leaves"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown1"
+                          >Dry Leaves</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Shredded Paper (no gloss)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown2"
+                          >Shredded Paper (no gloss)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Cardboard (Shredded)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown3"
+                          >Cardboard (Shredded)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Wood Chips/Sawdust"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown4"
+                          >Wood Chips/Sawdust</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Straw or Hay"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown5"
+                          >Straw or Hay</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Pine Needles"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown6"
+                          >Pine Needles</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Dryer Lint (Natural fibers)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_brown7"
+                          >Dryer Lint (Natural fibers)</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+
+                  <div
+                    class="p-4 bg-blue-100/50 rounded-lg border border-blue-200"
+                  >
+                    <h4
+                      class="font-bold text-lg text-blue-800 mb-3"
+                      data-translate-key="recipe_additives_title"
+                    >
+                      Special Additives
+                    </h4>
+                    <div class="space-y-2 text-gray-700">
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Egg Shells (Crushed)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_additive1"
+                          >Egg Shells (Crushed)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Wood Ash (Cold)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_additive2"
+                          >Wood Ash (Cold)</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Lime (Dolomite/Garden)"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_additive3"
+                          >Lime</span
+                        ></label
+                      >
+                      <label class="flex items-center"
+                        ><input
+                          type="checkbox"
+                          name="waste"
+                          value="Rock Dust/Azomite"
+                          class="mr-2"
+                        />
+                        <span data-translate-key="recipe_additive4"
+                          >Rock Dust/Azomite</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="p-4 bg-red-100/50 rounded-lg border border-red-200 mb-8"
+                >
+                  <h4
+                    class="font-bold text-lg text-red-800 mb-3"
+                    data-translate-key="recipe_avoid_title"
+                  >
+                    Items to Avoid
+                  </h4>
+                  <p
+                    class="text-sm text-gray-700"
+                    data-translate-key="recipe_avoid_items"
+                  >
+                    Meat / Dairy / Oils, Pet Waste (Cat/Dog), Diseased Plants
+                  </p>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full bg-[#2C5F2D] text-white font-bold py-3 rounded-lg shadow-md hover:bg-[#388E3C] transition-colors transform hover:scale-[1.01]"
+                  data-translate-key="recipe_generate_button"
+                >
+                  Generate Custom Recipe Guide
+                </button>
+              </form>
+            </div>
+
+            <div
+              class="bg-green-50 p-8 rounded-xl shadow-lg border border-green-200 lg:col-span-1"
+            >
+              <h3
+                class="text-2xl font-semibold text-[#2C5F2D] mb-6"
+                data-translate-key="recipe_step2"
+              >
+                2. Your AI-Generated Plan:
+              </h3>
+              <div id="ai-output" class="space-y-4">
+                <p
+                  class="text-gray-600"
+                  data-translate-key="recipe_output_placeholder"
+                >
+                  Select ingredients and click 'Generate' to see your custom
+                  compost recipe and plant care tips.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        id="marketplace-sell"
+        class="py-16 bg-gray-50 border-t border-b border-gray-200"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="text-3xl font-bold text-gray-800"
+              data-translate-key="market_title"
+            >
+              The Simulated Circular Economy Marketplace
+            </h2>
+            <p
+              class="mt-2 text-lg text-gray-500"
+              data-translate-key="market_subtitle"
+            >
+              Manually add your compost to instantly see a simulated listing
+              displayed for buyers.
+            </p>
+          </div>
+
+          <h3
+            class="text-2xl font-bold text-gray-800 text-center mb-3"
+            data-translate-key="market_sell_title"
+          >
+            1. Manually Add Your Compost Listing
+          </h3>
+          <p
+            class="text-lg text-gray-600 mb-8 text-center max-w-2xl mx-auto"
+            data-translate-key="market_sell_subtitle"
+          >
+            Fill in the details below to instantly display your simulated
+            organic fertilizer listing in the 'Buy' section.
+          </p>
+
+          <form
+            id="listing-form"
+            class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200"
+          >
+            <div class="mb-5">
+              <label
+                for="listing-type"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-translate-key="form_blend_type"
+                >Compost Blend Type</label
+              >
+              <select
+                id="listing-type"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#2C5F2D] focus:border-[#2C5F2D] transition duration-150"
+              >
+                <option value="" data-translate-key="form_select_blend">
+                  -- Select Blend Type --
+                </option>
+                <option
+                  value="All-Purpose Blend"
+                  data-translate-key="form_blend1"
+                >
+                  All-Purpose Blend
+                </option>
+                <option
+                  value="Vegetable Growth Mix"
+                  data-translate-key="form_blend2"
+                >
+                  Vegetable Growth Mix (High P-K)
+                </option>
+                <option
+                  value="Leafy Green Fuel"
+                  data-translate-key="form_blend3"
+                >
+                  Leafy Green Fuel (High N)
+                </option>
+                <option
+                  value="Vibrant Bloom Mix"
+                  data-translate-key="form_blend4"
+                >
+                  Vibrant Bloom Mix (High P)
+                </option>
+                <option value="Custom Recipe" data-translate-key="form_blend5">
+                  Custom Recipe
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-5">
+              <label
+                for="listing-quantity"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-translate-key="form_quantity"
+                >Quantity (kg)</label
+              >
+              <input
+                type="number"
+                id="listing-quantity"
+                required
+                placeholder="e.g., 50"
+                min="1"
+                step="any"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#2C5F2D] focus:border-[#2C5F2D] transition duration-150"
+              />
+            </div>
+
+            <div class="mb-5">
+              <label
+                for="listing-image"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-translate-key="form_upload_image"
+                >Upload Crop/Compost Image (Simulated)</label
+              >
+              <input
+                type="file"
+                id="listing-image"
+                accept="image/*"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#2C5F2D] focus:border-[#2C5F2D] transition duration-150"
+              />
+            </div>
+
+            <div class="mb-8">
+              <label
+                for="listing-price"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-translate-key="form_price"
+                >Price (₹ per kg)</label
+              >
+              <input
+                type="number"
+                id="listing-price"
+                required
+                placeholder="e.g., 5.50"
+                min="0.01"
+                step="any"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#2C5F2D] focus:border-[#2C5F2D] transition duration-150"
+              />
+            </div>
+
+            <button
+              type="button"
+              onclick="submitCompostListing()"
+              class="w-full bg-orange-500 text-white font-bold py-3 rounded-lg shadow-md hover:bg-orange-600 transition-colors transform hover:scale-[1.01]"
+              data-translate-key="form_add_listing_button"
+            >
+              Add Listing Manually
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section id="marketplace-buy" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3
+            class="text-2xl font-bold text-gray-800 text-center mb-8"
+            data-translate-key="market_buy_title"
+          >
+            2. Available Listings (Manual View)
+          </h3>
+
+          <div
+            id="buy-listings"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          >
+            </div>
+        </div>
+      </section>
+
+      <section id="process" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="text-3xl font-bold text-gray-800"
+              data-translate-key="process_title"
+            >
+              The Composting Journey
+            </h2>
+            <p
+              class="mt-2 text-lg text-gray-500"
+              data-translate-key="process_subtitle"
+            >
+              Our guide simplifies the fertilizer-making process into easy,
+              manageable steps. Click a step to learn more.
+            </p>
+          </div>
+          <div
+            class="flex flex-wrap justify-center gap-3 mb-8"
+            id="process-buttons"
+          ></div>
+          <div
+            class="bg-white rounded-xl shadow-xl p-8 min-h-[250px] flex items-center border border-gray-100"
+          >
+            <div id="process-display">
+              <h3
+                id="process-title"
+                class="text-2xl font-bold text-[#2C5F2D] mb-2"
+              ></h3>
+              <p id="process-description" class="text-gray-600 text-lg"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="impact"
+        class="py-16 bg-gray-50 border-t border-b border-gray-200"
+      >
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2
+              class="text-3xl font-bold text-gray-800"
+              data-translate-key="impact_title"
+            >
+              Our Global Impact Dashboard (SDGs)
+            </h2>
+            <p
+              class="mt-2 text-lg text-gray-500"
+              data-translate-key="impact_subtitle"
+            >
+              Krishicycle directly contributes to numerous UN Sustainable
+              Development Goals (SDGs).
+            </p>
+          </div>
+          <div class="text-center mb-8">
+            <div
+              id="sdg-filters"
+              class="inline-flex rounded-md shadow-sm"
+              role="group"
+            ></div>
+          </div>
+          <div class="chart-container mb-12">
+            <canvas id="sdgImpactChart"></canvas>
+          </div>
+          <div
+            id="sdg-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="font-bold text-xl">
+          PRISM : Sociothon 2025 - Team Cracked HAMS
+        </p>
+        <p
+          class="mt-4 text-sm text-gray-400"
+          data-translate-key="footer_tagline"
+        >
+          “Recycling Waste. Reviving Earth. Rewarding You.”
+        </p>
+        <p
+          class="mt-2 text-xs text-gray-600"
+          data-translate-key="footer_note"
+        >
+          Simulated functionality (Manual Data Mode) for demonstration purposes.
+        </p>
+      </div>
+    </footer>
+
+    <div
+      id="custom-modal"
+      class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-[100]"
+      style="display: none"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
+        <h3
+          class="text-xl font-bold text-[#2C5F2D] mb-4"
+          data-translate-key="modal_title"
+        >
+          Notification
+        </h3>
+        <p id="modal-message" class="text-gray-700 mb-6"></p>
+        <button
+          onclick="closeModal()"
+          class="w-full bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // --- START TRANSLATION LOGIC ---
+
+      let currentLanguage = "en";
+
+      const translations = {
+        en: {
+          nav_overview: "Overview",
+          nav_marketplace: "Marketplace",
+          nav_recipe: "Recipe Guide",
+          nav_process: "Process Guide",
+          nav_impact: "Impact",
+          hero_title: "Turning Waste into Wealth.",
+          hero_subtitle:
+            "An Organic Fertilizer Assistant to empower communities, heal the planet, and foster a circular economy.",
+          hero_button: "Start the Cycle",
+          problem_title: "The Challenge and Our Innovative Solution",
+          problem_section1_title: "The Problems We Face",
+          problem_1:
+            "<b>Massive Bio-Waste:</b> Tons of green waste, manure, and leaves are discarded daily.",
+          problem_2:
+            "<b>Harmful Fertilizers:</b> Artificial fertilizers are expensive, degrade soil, and pollute water.",
+          problem_3:
+            "<b>Knowledge Gap:</b> Lack of accessible knowledge on effective organic composting.",
+          solution_section_title: "The Krishicycle Solution",
+          solution_1:
+            "<b>Simple Guidance:</b> Step-by-step instructions and recipe tools to turn local waste into valuable organic fertilizer.",
+          solution_2:
+            "<b>Manual Marketplace:</b> Input data to instantly see a simulated listing displayed for buyers.",
+          recipe_title: "Create Your Custom Compost Recipe",
+          recipe_subtitle:
+            "Select your available ingredients for a tailored guide.",
+          recipe_step1: "1. Select available ingredients:",
+          recipe_greens_title: "Greens (Nitrogen-Rich)",
+          recipe_green1: "Fruit & Veggie Scraps",
+          recipe_green2: "Coffee Grounds",
+          recipe_green3: "Tea Bags/Leaves",
+          recipe_green4: "Grass Clippings (Fresh)",
+          recipe_green5: "Manure (Cow, Goat, Poultry)",
+          recipe_green6: "Weeds (No seeds)",
+          recipe_green7: "Seaweed/Kelp",
+          recipe_browns_title: "Browns (Carbon-Rich)",
+          recipe_brown1: "Dry Leaves",
+          recipe_brown2: "Shredded Paper (no gloss)",
+          recipe_brown3: "Cardboard (Shredded)",
+          recipe_brown4: "Wood Chips/Sawdust",
+          recipe_brown5: "Straw or Hay",
+          recipe_brown6: "Pine Needles",
+          recipe_brown7: "Dryer Lint (Natural fibers)",
+          recipe_additives_title: "Special Additives",
+          recipe_additive1: "Egg Shells (Crushed)",
+          recipe_additive2: "Wood Ash (Cold)",
+          recipe_additive3: "Lime",
+          recipe_additive4: "Rock Dust/Azomite",
+          recipe_avoid_title: "Items to Avoid",
+          recipe_avoid_items:
+            "Meat / Dairy / Oils, Pet Waste (Cat/Dog), Diseased Plants",
+          recipe_generate_button: "Generate Custom Recipe Guide",
+          recipe_step2: "2. Your AI-Generated Plan:",
+          recipe_output_placeholder:
+            "Select ingredients and click 'Generate' to see your custom compost recipe and plant care tips.",
+          market_title: "The Simulated Circular Economy Marketplace",
+          market_subtitle:
+            "Manually add your compost to instantly see a simulated listing displayed for buyers.",
+          market_sell_title: "1. Manually Add Your Compost Listing",
+          market_sell_subtitle:
+            "Fill in the details below to instantly display your simulated organic fertilizer listing in the 'Buy' section.",
+          form_blend_type: "Compost Blend Type",
+          form_select_blend: "-- Select Blend Type --",
+          form_blend1: "All-Purpose Blend",
+          form_blend2: "Vegetable Growth Mix (High P-K)",
+          form_blend3: "Leafy Green Fuel (High N)",
+          form_blend4: "Vibrant Bloom Mix (High P)",
+          form_blend5: "Custom Recipe",
+          form_quantity: "Quantity (kg)",
+          form_upload_image: "Upload Crop/Compost Image (Simulated)",
+          form_price: "Price (₹ per kg)",
+          form_add_listing_button: "Add Listing Manually",
+          market_buy_title: "2. Available Listings (Manual View)",
+          process_title: "The Composting Journey",
+          process_subtitle:
+            "Our guide simplifies the fertilizer-making process into easy, manageable steps. Click a step to learn more.",
+          impact_title: "Our Global Impact Dashboard (SDGs)",
+          impact_subtitle:
+            "Krishicycle directly contributes to numerous UN Sustainable Development Goals (SDGs).",
+          footer_tagline: "“Recycling Waste. Reviving Earth. Rewarding You.”",
+          footer_note:
+            "Simulated functionality (Manual Data Mode) for demonstration purposes.",
+          modal_title: "Notification",
+          // Dynamic text
+          listing_placeholder:
+            "No listings yet. Add one above!",
+          listing_available:
+            "No compost listings available yet. Be the first to list!",
+          listing_by: "kg listed by Seller:",
+          listing_buy_btn: "Buy",
+          listing_delete_btn: "Delete",
+          alert_fill_details:
+            "Please fill in all listing details (Type, Quantity, Price).",
+          alert_valid_numbers: "Quantity and Price must be valid numbers.",
+          alert_file_error:
+            "Error reading file. Please try a different image or a smaller size.",
+          alert_listing_added:
+            "Manual Listing for {type} added successfully! Displaying in the 'Buy' section.",
+          alert_deleted: "Listing has been successfully deleted.",
+          alert_delete_error: "Error: Could not find the listing to delete.",
+          alert_transaction_sim:
+            "Transaction Simulated: You are now buying {quantity}kg of {type}",
+          userProfileAlert: "User Profile/Login Simulation",
+          recipe_generating: "Generating your custom plan... 🤖",
+          recipe_select_one: "Please select at least one ingredient.",
+          recipe_custom_recipe_title: "🌿 Your Custom Compost Recipe:",
+          recipe_plant_tips_title: "🪴 Plant Care Tips:",
+          recipe_based_on: "<b>Based on your ingredients:</b> {ingredients}. ",
+          recipe_advice_parts: `You have selected <b>{greens} Green part(s)</b> and <b>{browns} Brown part(s)</b>. `,
+          recipe_advice_no_ingredients:
+            "Please select ingredients to generate a meaningful recipe.",
+          recipe_advice_only_browns: `You have only 'Browns'. You <b>MUST add 'Greens'</b> (like coffee grounds or fruit scraps) to activate decomposition.`,
+          recipe_advice_only_greens: `You have only 'Greens'. You <b>MUST add 'Browns'</b> (like shredded cardboard or dry leaves) to balance the ratio and prevent foul odors.`,
+          recipe_advice_ratio: `The Brown-to-Green ratio (by selection count) is approximately {ratio}:1. `,
+          recipe_advice_ideal_ratio: `This is a <b>fantastic, near-ideal ratio!</b> Layer these ingredients and turn the pile weekly to ensure good aeration, which accelerates decomposition.`,
+          recipe_advice_low_ratio: `Your mix is too rich in 'Greens'. Consider adding more 'browns' like dried leaves or cardboard to achieve an ideal 2:1 brown-to-green ratio and <b>prevent the pile from becoming slimy or smelly.</b> Mix thoroughly and keep the pile moist.`,
+          recipe_advice_high_ratio: `Your mix is too rich in 'Browns'. Decomposition will be slow. Consider adding more 'Greens' (manure, coffee grounds) to provide the nitrogen needed to <b>heat up the pile and speed up the process.</b>`,
+          plant_tips_base:
+            "Your resulting compost will be a powerhouse of nutrients. ",
+          plant_tips_eggshells:
+            "The added <b>calcium</b> from eggshells is excellent for preventing blossom-end rot in tomatoes and improving cell structure. ",
+          plant_tips_coffee:
+            "<b>Coffee grounds</b> will provide a nitrogen and trace mineral boost, perfect for leafy greens and acid-loving plants. ",
+          plant_tips_scraps:
+            "The high <b>potassium</b> from fruit scraps and general nutrients from veggie scraps will promote strong flower and fruit development. ",
+          plant_tips_ash:
+            "<b>Wood Ash</b> adds potassium and liming properties, which can help neutralize soil acidity, but use sparingly. ",
+          plant_tips_lime:
+            "The added <b>Lime</b> is key for neutralizing acidic soil and providing magnesium and calcium for plant health. ",
+          plant_tips_final:
+            "After it has fully decomposed (it should be dark and crumbly), use a 1-inch layer as a top dressing for your plants.",
+        },
+        hi: {
+          nav_overview: "अवलोकन",
+          nav_marketplace: "बाज़ार",
+          nav_recipe: "रेसिपी गाइड",
+          nav_process: "प्रक्रिया गाइड",
+          nav_impact: "प्रभाव",
+          hero_title: "अपशिष्ट को धन में बदलना।",
+          hero_subtitle:
+            "समुदायों को सशक्त बनाने, ग्रह को स्वस्थ करने और एक चक्रीय अर्थव्यवस्था को बढ़ावा देने के लिए एक जैविक उर्वरक सहायक।",
+          hero_button: "चक्र शुरू करें",
+          problem_title: "चुनौती और हमारा अभिनव समाधान",
+          problem_section1_title: "जिन समस्याओं का हम सामना करते हैं",
+          problem_1:
+            "<b>भारी जैव-अपशिष्ट:</b> टन हरा कचरा, खाद और पत्तियां प्रतिदिन फेंकी जाती हैं।",
+          problem_2:
+            "<b>हानिकारक उर्वरक:</b> कृत्रिम उर्वरक महंगे होते हैं, मिट्टी को खराब करते हैं, और पानी को प्रदूषित करते हैं।",
+          problem_3:
+            "<b>ज्ञान की कमी:</b> प्रभावी जैविक खाद बनाने पर सुलभ ज्ञान का अभाव।",
+          solution_section_title: "कृषि-चक्र समाधान",
+          solution_1:
+            "<b>सरल मार्गदर्शन:</b> स्थानीय कचरे को मूल्यवान जैविक उर्वरक में बदलने के लिए चरण-दर-चरण निर्देश और रेसिपी उपकरण।",
+          solution_2:
+            "<b>मैनुअल बाज़ार:</b> खरीदारों के लिए प्रदर्शित एक नकली लिस्टिंग को तुरंत देखने के लिए डेटा इनपुट करें।",
+          recipe_title: "अपनी कस्टम कम्पोस्ट रेसिपी बनाएं",
+          recipe_subtitle:
+            "एक विशेष गाइड के लिए अपनी उपलब्ध सामग्री का चयन करें।",
+          recipe_step1: "१. उपलब्ध सामग्री का चयन करें:",
+          recipe_greens_title: "हरा (नाइट्रोजन युक्त)",
+          recipe_green1: "फल और सब्जी के छिलके",
+          recipe_green2: "कॉफी ग्राउंड्स",
+          recipe_green3: "चाय की पत्तियां/बैग",
+          recipe_green4: "ताज़ी घास की कतरनें",
+          recipe_green5: "खाद (गाय, बकरी, मुर्गी)",
+          recipe_green6: "खरपतवार (बीज रहित)",
+          recipe_green7: "समुद्री शैवाल/केल्प",
+          recipe_browns_title: "भूरा (कार्बन युक्त)",
+          recipe_brown1: "सूखे पत्ते",
+          recipe_brown2: "कटा हुआ कागज (चमकदार नहीं)",
+          recipe_brown3: "कटा हुआ कार्डबोर्ड",
+          recipe_brown4: "लकड़ी के चिप्स/बुरादा",
+          recipe_brown5: "पुआल या सूखी घास",
+          recipe_brown6: "चीड़ की सुइयां",
+          recipe_brown7: "ड्रायर लिंट (प्राकृतिक फाइबर)",
+          recipe_additives_title: "विशेष योजक",
+          recipe_additive1: "अंडे के छिलके (कुचले हुए)",
+          recipe_additive2: "लकड़ी की राख (ठंडी)",
+          recipe_additive3: "चूना",
+          recipe_additive4: "रॉक डस्ट/एजोमाइट",
+          recipe_avoid_title: "इन चीजों से बचें",
+          recipe_avoid_items:
+            "मांस / डेयरी / तेल, पालतू जानवरों का कचरा (बिल्ली/कुत्ता), रोगग्रस्त पौधे",
+          recipe_generate_button: "कस्टम रेसिपी गाइड बनाएं",
+          recipe_step2: "२. आपकी एआई-जनरेटेड योजना:",
+          recipe_output_placeholder:
+            "अपनी कस्टम कम्पोस्ट रेसिपी और पौधों की देखभाल के टिप्स देखने के लिए सामग्री चुनें और 'बनाएं' पर क्लिक करें।",
+          market_title: "नकली चक्रीय अर्थव्यवस्था बाज़ार",
+          market_subtitle:
+            "खरीदारों के लिए प्रदर्शित एक नकली लिस्टिंग को तुरंत देखने के लिए अपनी खाद मैन्युअल रूप से जोड़ें।",
+          market_sell_title: "१. अपनी कम्पोस्ट लिस्टिंग मैन्युअल रूप से जोड़ें",
+          market_sell_subtitle:
+            "'खरीदें' अनुभाग में अपनी नकली जैविक उर्वरक लिस्टिंग को तुरंत प्रदर्शित करने के लिए नीचे दिए गए विवरण भरें।",
+          form_blend_type: "कम्पोस्ट मिश्रण का प्रकार",
+          form_select_blend: "-- मिश्रण का प्रकार चुनें --",
+          form_blend1: "सर्व-उद्देश्यीय मिश्रण",
+          form_blend2: "सब्जी विकास मिश्रण (उच्च P-K)",
+          form_blend3: "पत्तेदार हरी ईंधन (उच्च N)",
+          form_blend4: "जीवंत खिलना मिश्रण (उच्च P)",
+          form_blend5: "कस्टम रेसिपी",
+          form_quantity: "मात्रा (किग्रा)",
+          form_upload_image: "फसल/कम्पोस्ट छवि अपलोड करें (नकली)",
+          form_price: "कीमत (₹ प्रति किग्रा)",
+          form_add_listing_button: "लिस्टिंग मैन्युअल रूप से जोड़ें",
+          market_buy_title: "२. उपलब्ध लिस्टिंग (मैनुअल व्यू)",
+          process_title: "कम्पोस्टिंग की यात्रा",
+          process_subtitle:
+            "हमारी गाइड उर्वरक बनाने की प्रक्रिया को आसान, प्रबंधनीय चरणों में सरल बनाती है। अधिक जानने के लिए एक चरण पर क्लिक करें।",
+          impact_title: "हमारा वैश्विक प्रभाव डैशबोर्ड (SDGs)",
+          impact_subtitle:
+            "कृषि-चक्र सीधे संयुक्त राष्ट्र के कई सतत विकास लक्ष्यों (SDGs) में योगदान देता है।",
+          footer_tagline:
+            "“कचरे का पुनर्चक्रण। पृथ्वी का पुनरुद्धार। आपको पुरस्कार।”",
+          footer_note:
+            "प्रदर्शन उद्देश्यों के लिए नकली कार्यक्षमता (मैनुअल डेटा मोड)।",
+          modal_title: "सूचना",
+          // Dynamic text
+          listing_placeholder: "अभी तक कोई लिस्टिंग नहीं है। ऊपर एक जोड़ें!",
+          listing_available:
+            "अभी तक कोई कम्पोस्ट लिस्टिंग उपलब्ध नहीं है। लिस्ट करने वाले पहले व्यक्ति बनें!",
+          listing_by: "किग्रा विक्रेता द्वारा सूचीबद्ध:",
+          listing_buy_btn: " खरीदें",
+          listing_delete_btn: "हटाएं",
+          alert_fill_details:
+            "कृपया सभी लिस्टिंग विवरण भरें (प्रकार, मात्रा, मूल्य)।",
+          alert_valid_numbers: "मात्रा और मूल्य मान्य संख्या होनी चाहिए।",
+          alert_file_error:
+            "फ़ाइल पढ़ने में त्रुटि। कृपया एक अलग छवि या छोटे आकार का प्रयास करें।",
+          alert_listing_added:
+            "{type} के लिए मैन्युअल लिस्टिंग सफलतापूर्वक जोड़ी गई! 'खरीदें' अनुभाग में प्रदर्शित हो रही है।",
+          alert_deleted: "लिस्टिंग सफलतापूर्वक हटा दी गई है।",
+          alert_delete_error: "त्रुटि: हटाने के लिए लिस्टिंग नहीं मिली।",
+          alert_transaction_sim:
+            "लेन-देन नकली: अब आप {quantity} किलो {type} खरीद रहे हैं",
+          userProfileAlert: "उपयोगकर्ता प्रोफ़ाइल/लॉगिन सिमुलेशन",
+          recipe_generating: "आपकी कस्टम योजना बना रहा है... 🤖",
+          recipe_select_one: "कृपया कम से कम एक संघटक चुनें।",
+          recipe_custom_recipe_title: "🌿 आपकी कस्टम कम्पोस्ट रेसिपी:",
+          recipe_plant_tips_title: "🪴 पौधों की देखभाल के टिप्स:",
+          recipe_based_on: "<b>आपकी सामग्री के आधार पर:</b> {ingredients}. ",
+          recipe_advice_parts: `आपने <b>{greens} हरे भाग</b> और <b>{browns} भूरे भाग</b> चुने हैं। `,
+          recipe_advice_no_ingredients:
+            "एक सार्थक रेसिपी बनाने के लिए कृपया सामग्री चुनें।",
+          recipe_advice_only_browns: `आपके पास केवल 'भूरे' हैं। अपघटन को सक्रिय करने के लिए आपको <b>'हरे' (जैसे कॉफी ग्राउंड्स या फलों के छिलके) जोड़ने होंगे</b>।`,
+          recipe_advice_only_greens: `आपके पास केवल 'हरे' हैं। अनुपात को संतुलित करने और दुर्गंध को रोकने के लिए आपको <b>'भूरे' (जैसे कटा हुआ कार्डबोर्ड या सूखे पत्ते) जोड़ने होंगे</b>।`,
+          recipe_advice_ratio: `चयन संख्या के अनुसार भूरे-से-हरे का अनुपात लगभग {ratio}:1 है। `,
+          recipe_advice_ideal_ratio: `यह एक <b>शानदार, लगभग आदर्श अनुपात है!</b> इन सामग्रियों को परत दर परत रखें और अच्छे वातन को सुनिश्चित करने के लिए ढेर को साप्ताहिक रूप से पलटें, जो अपघटन को तेज करता है।`,
+          recipe_advice_low_ratio: `आपका मिश्रण 'हरे' में बहुत समृद्ध है। एक आदर्श 2:1 भूरे-से-हरे अनुपात प्राप्त करने के लिए और <b>ढेर को चिपचिपा या बदबूदार होने से रोकने के लिए</b> अधिक 'भूरे' जैसे सूखे पत्ते या कार्डबोर्ड जोड़ने पर विचार करें। अच्छी तरह मिलाएं और ढेर को नम रखें।`,
+          recipe_advice_high_ratio: `आपका मिश्रण 'भूरे' में बहुत समृद्ध है। अपघटन धीमा होगा। <b>ढेर को गर्म करने और प्रक्रिया को तेज करने के लिए</b> आवश्यक नाइट्रोजन प्रदान करने के लिए अधिक 'हरे' (खाद, कॉफी ग्राउंड्स) जोड़ने पर विचार करें।`,
+          plant_tips_base:
+            "आपकी परिणामी खाद पोषक तत्वों का एक पावरहाउस होगी। ",
+          plant_tips_eggshells:
+            "अंडे के छिलकों से मिला <b>कैल्शियम</b> टमाटर में ब्लॉसम-एंड रोट को रोकने और कोशिका संरचना में सुधार के लिए बहुत अच्छा है। ",
+          plant_tips_coffee:
+            "<b>कॉफी ग्राउंड्स</b> नाइट्रोजन और ट्रेस मिनरल बूस्ट प्रदान करेगा, जो पत्तेदार साग और एसिड-प्रेमी पौधों के लिए एकदम सही है। ",
+          plant_tips_scraps:
+            "फलों के छिलकों से उच्च <b>पोटेशियम</b> और सब्जी के छिलकों से सामान्य पोषक तत्व मजबूत फूल और फल के विकास को बढ़ावा देंगे। ",
+          plant_tips_ash:
+            "<b>लकड़ी की राख</b> पोटेशियम और चूने के गुण जोड़ती है, जो मिट्टी की अम्लता को बेअसर करने में मदद कर सकती है, लेकिन संयम से उपयोग करें। ",
+          plant_tips_lime:
+            "अतिरिक्त <b>चूना</b> अम्लीय मिट्टी को बेअसर करने और पौधों के स्वास्थ्य के लिए मैग्नीशियम और कैल्शियम प्रदान करने के लिए महत्वपूर्ण है। ",
+          plant_tips_final:
+            "पूरी तरह से विघटित हो जाने के बाद (यह गहरा और भुरभुरा होना चाहिए), अपने पौधों के लिए टॉप ड्रेसिंग के रूप में 1 इंच की परत का उपयोग करें।",
+        },
+      };
+
+      function switchLanguage(lang) {
+        if (translations[lang]) {
+          currentLanguage = lang;
+          localStorage.setItem("krishi-lang", lang);
+          translatePage(lang);
+          // Update active button style
+          document.querySelectorAll(".lang-btn").forEach((btn) => {
+            btn.classList.remove("active");
+          });
+          document
+            .querySelector(`.lang-btn[onclick="switchLanguage('${lang}')"]`)
+            .classList.add("active");
+        }
+      }
+
+      function translatePage(lang) {
+        document.querySelectorAll("[data-translate-key]").forEach((el) => {
+          const key = el.getAttribute("data-translate-key");
+          if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === "INPUT" && el.placeholder) {
+              el.placeholder = translations[lang][key];
+            } else {
+              el.innerHTML = translations[lang][key];
+            }
+          }
+        });
+
+        // Re-render dynamic content with new language
+        const activeProcessIndex = Array.from(
+          document.querySelectorAll(".step-btn")
+        ).findIndex((btn) => btn.classList.contains("active"));
+        updateProcessContent(activeProcessIndex > -1 ? activeProcessIndex : 0);
+
+        const activeSdgFilter =
+          document.querySelector(".filter-btn.bg-gray-200")?.dataset.category ||
+          "All";
+        renderSdgCards(activeSdgFilter);
+        renderListings(manualListings, document.getElementById("buy-listings"));
+        createOrUpdateChart(); // Redraw chart for title translation
+      }
+
+      // --- END TRANSLATION LOGIC ---
+
+      // Global array to store manually added listings
+      let manualListings = [];
+
+      // --- Custom Modal Functions ---
+      function alertMessage(message) {
+        document.getElementById("modal-message").textContent = message;
+        document.getElementById("custom-modal").style.display = "flex";
+      }
+      window.alertMessage = alertMessage;
+
+      function closeModal() {
+        document.getElementById("custom-modal").style.display = "none";
+      }
+      window.closeModal = closeModal;
+
+      // --- Helper function to convert file to base64 ---
+      function getBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+      }
+
+      // --- Manual Marketplace Logic ---
+
+      window.submitCompostListing = async function () {
+        const typeEl = document.getElementById("listing-type");
+        const type = typeEl.value;
+        const selectedOption = typeEl.options[typeEl.selectedIndex];
+        const typeTranslateKey = selectedOption.dataset.translateKey;
+        const typeDisplay =
+          translations[currentLanguage][typeTranslateKey] || type;
+
+        const quantity = document.getElementById("listing-quantity").value;
+        const price = document.getElementById("listing-price").value;
+        const imageFile = document.getElementById("listing-image").files[0];
+        let imageUrl = null;
+
+        if (!type || !quantity || !price) {
+          alertMessage(translations[currentLanguage].alert_fill_details);
+          return;
+        }
+
+        if (isNaN(parseFloat(quantity)) || isNaN(parseFloat(price))) {
+          alertMessage(translations[currentLanguage].alert_valid_numbers);
+          return;
+        }
+
+        if (imageFile) {
+          try {
+            imageUrl = await getBase64(imageFile);
+          } catch (error) {
+            alertMessage(translations[currentLanguage].alert_file_error);
+            return;
+          }
+        }
+
+        const newListing = {
+          id: Math.random().toString(36).substring(2, 9),
+          sellerId: "ManualUser",
+          type: type, // Store original value for logic
+          typeTranslateKey: typeTranslateKey, // Store key for re-translation
+          quantity: parseFloat(quantity),
+          price: parseFloat(price),
+          imageUrl: imageUrl,
+          timestamp: new Date(),
+        };
+
+        manualListings.unshift(newListing);
+        document.getElementById("listing-form").reset();
+        alertMessage(
+          translations[currentLanguage].alert_listing_added.replace(
+            "{type}",
+            typeDisplay
+          )
+        );
+
+        renderListings(manualListings, document.getElementById("buy-listings"));
+      };
+
+      function renderListings(listings, container) {
+        container.innerHTML = "";
+
+        if (listings.length === 0) {
+          container.innerHTML = `<p class="text-gray-500 text-center col-span-4" data-translate-key="listing_available">${translations[currentLanguage].listing_available}</p>`;
+          return;
+        }
+
+        listings.forEach((listing) => {
+          const dateString = new Date(listing.timestamp).toLocaleDateString();
+          const typeDisplay =
+            translations[currentLanguage][listing.typeTranslateKey] ||
+            listing.type;
+
+          const seed = typeDisplay.length + typeDisplay.charCodeAt(0);
+          const randomColor = Math.floor(
+            (Math.sin(seed) * 16777215) % 16777215
+          ).toString(16);
+          const paddedColor =
+            "000000".substring(0, 6 - randomColor.length) + randomColor;
+
+          const imageSrc = listing.imageUrl
+            ? listing.imageUrl
+            : `https://placehold.co/300x150/${paddedColor}/FFFFFF?text=${typeDisplay
+                .substring(0, 10)
+                .toUpperCase()}`;
+
+          const card = document.createElement("div");
+          card.className =
+            "card bg-gray-50 p-5 rounded-xl shadow-md border border-gray-200";
+          card.innerHTML = `
+            <img src="${imageSrc}" alt="${typeDisplay}" class="w-full h-32 object-cover rounded-lg mb-4 border border-gray-300">
+            <h4 class="text-xl font-semibold text-gray-800">${typeDisplay}</h4>
+            <p class="text-sm text-gray-500 mb-3">${
+              listing.quantity
+            } ${
+            translations[currentLanguage].listing_by
+          } ManualUser (${dateString})</p>
+            <p class="text-2xl font-bold text-[#2C5F2D] mb-4">₹${listing.price.toFixed(
+              2
+            )} / kg</p>
+            <div class="flex space-x-2">
+                <button onclick="alertMessage(translations[currentLanguage].alert_transaction_sim.replace('{quantity}', ${
+                  listing.quantity
+                }).replace('{type}', '${typeDisplay}'))"
+                        class="w-full bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-600 transition-colors">${
+                          translations[currentLanguage].listing_buy_btn
+                        }</button>
+                <button onclick="deleteListing('${listing.id}')"
+                        class="w-full bg-red-500 text-white font-bold py-2 rounded-lg hover:bg-red-600 transition-colors">${
+                          translations[currentLanguage].listing_delete_btn
+                        }</button>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      window.deleteListing = function (listingId) {
+        const listingIndex = manualListings.findIndex(
+          (listing) => listing.id === listingId
+        );
+
+        if (listingIndex > -1) {
+          manualListings.splice(listingIndex, 1);
+          alertMessage(translations[currentLanguage].alert_deleted);
+          renderListings(
+            manualListings,
+            document.getElementById("buy-listings")
+          );
+        } else {
+          alertMessage(translations[currentLanguage].alert_delete_error);
+        }
+      };
+
+      // --- Compost Recipe Functions ---
+      function generateCompostRecipe(ingredients) {
+        const GREEN_INGREDIENTS = [
+          "Fruit & Veggie Scraps",
+          "Coffee Grounds",
+          "Tea Bags/Leaves",
+          "Grass Clippings (Fresh)",
+          "Manure (Cow, Goat, Poultry)",
+          "Weeds (No seeds)",
+          "Seaweed/Kelp",
+        ];
+        const BROWN_INGREDIENTS = [
+          "Dry Leaves",
+          "Shredded Paper (no gloss)",
+          "Cardboard (Shredded)",
+          "Wood Chips/Sawdust",
+          "Straw or Hay",
+          "Pine Needles",
+          "Dryer Lint (Natural fibers)",
+        ];
+
+        let greens = ingredients.filter((i) =>
+          GREEN_INGREDIENTS.includes(i)
+        ).length;
+        let browns = ingredients.filter((i) =>
+          BROWN_INGREDIENTS.includes(i)
+        ).length;
+
+        let ratio =
+          greens > 0
+            ? (browns / greens).toFixed(1)
+            : browns > 0
+            ? "Infinite"
+            : 0;
+        let advice = translations[currentLanguage].recipe_advice_parts
+          .replace("{greens}", greens)
+          .replace("{browns}", browns);
+
+        if (greens === 0 && browns === 0) {
+          advice = translations[currentLanguage].recipe_advice_no_ingredients;
+        } else if (greens === 0) {
+          advice += translations[currentLanguage].recipe_advice_only_browns;
+        } else if (browns === 0) {
+          advice += translations[currentLanguage].recipe_advice_only_greens;
+        } else {
+          advice += translations[currentLanguage].recipe_advice_ratio.replace(
+            "{ratio}",
+            ratio
+          );
+
+          if (ratio >= 1.5 && ratio <= 3.0) {
+            advice += translations[currentLanguage].recipe_advice_ideal_ratio;
+          } else if (ratio < 1.5) {
+            advice += translations[currentLanguage].recipe_advice_low_ratio;
+          } else {
+            advice += translations[currentLanguage].recipe_advice_high_ratio;
+          }
+        }
+        return (
+          translations[currentLanguage].recipe_based_on.replace(
+            "{ingredients}",
+            ingredients.join(", ")
+          ) + advice
+        );
+      }
+
+      function generatePlantCareTips(ingredients) {
+        let tips = translations[currentLanguage].plant_tips_base;
+        if (ingredients.includes("Egg Shells (Crushed)"))
+          tips += translations[currentLanguage].plant_tips_eggshells;
+        if (ingredients.includes("Coffee Grounds"))
+          tips += translations[currentLanguage].plant_tips_coffee;
+        if (ingredients.includes("Fruit & Veggie Scraps"))
+          tips += translations[currentLanguage].plant_tips_scraps;
+        if (ingredients.includes("Wood Ash (Cold)"))
+          tips += translations[currentLanguage].plant_tips_ash;
+        if (ingredients.includes("Lime (Dolomite/Garden)"))
+          tips += translations[currentLanguage].plant_tips_lime;
+        tips += translations[currentLanguage].plant_tips_final;
+        return tips;
+      }
+
+      // --- Process Guide Data and Logic ---
+      const processData = [
+        {
+          title: { en: "1. Collect", hi: "१. इकट्ठा करें" },
+          description: {
+            en: "Gather organic waste like green clippings, dry leaves, animal manure, and kitchen scraps.",
+            hi: "हरे कचरे, सूखी पत्तियों, पशुओं की खाद और रसोई के कचरे जैसे जैविक कचरे को इकट्ठा करें।",
+          },
+        },
+        {
+          title: { en: "2. Chop/Shred", hi: "२. काटें/टुकड़े करें" },
+          description: {
+            en: "Break down larger materials into smaller pieces. This increases the surface area for microbes to work, speeding up decomposition.",
+            hi: "बड़ी सामग्री को छोटे टुकड़ों में तोड़ें। यह सूक्ष्मजीवों के काम करने के लिए सतह क्षेत्र को बढ़ाता है, जिससे अपघटन तेज होता है।",
+          },
+        },
+        {
+          title: { en: "3. Mix", hi: "३. मिलाएं" },
+          description: {
+            en: 'Combine your materials, ensuring a good balance of "greens" (nitrogen-rich) and "browns" (carbon-rich).',
+            hi: 'अपनी सामग्री को मिलाएं, "हरे" (नाइट्रोजन युक्त) और "भूरे" (कार्बन युक्त) का अच्छा संतुलन सुनिश्चित करें।',
+          },
+        },
+        {
+          title: { en: "4. Pile Up", hi: "४. ढेर लगाएं" },
+          description: {
+            en: "Create a compost pile or use a compost bin. The ideal size is about 3x3x3 feet to retain heat and moisture effectively.",
+            hi: "एक कम्पोस्ट ढेर बनाएं या कम्पोस्ट बिन का उपयोग करें। गर्मी और नमी को प्रभावी ढंग से बनाए रखने के लिए आदर्श आकार लगभग 3x3x3 फीट है।",
+          },
+        },
+        {
+          title: { en: "5. Moisten", hi: "५. नम करें" },
+          description: {
+            en: "Lightly water the pile. It should be as damp as a wrung-out sponge, but not soggy.",
+            hi: "ढेर पर हल्का पानी डालें। यह निचोड़े हुए स्पंज की तरह नम होना चाहिए, लेकिन गीला नहीं।",
+          },
+        },
+        {
+          title: { en: "6. Aerate/Turn", hi: "६. हवा दें/पलटें" },
+          description: {
+            en: "Turn the compost pile every week or two with a pitchfork. This provides crucial oxygen to the microorganisms.",
+            hi: "हर एक या दो सप्ताह में कांटे से कम्पोस्ट के ढेर को पलटें। यह सूक्ष्मजीवों को महत्वपूर्ण ऑक्सीजन प्रदान करता है।",
+          },
+        },
+        {
+          title: { en: "7. Monitor", hi: "७. निगरानी करें" },
+          description: {
+            en: "Keep an eye on the temperature and moisture. The pile should be warm to the touch.",
+            hi: "तापमान और नमी पर नजर रखें। ढेर छूने पर गर्म होना चाहिए।",
+          },
+        },
+        {
+          title: { en: "8. Mature", hi: "८. परिपक्व करें" },
+          description: {
+            en: "Let the compost sit and cure for several weeks. This final stage stabilizes the nutrients and ensures it is ready for use.",
+            hi: "कम्पोस्ट को कई हफ्तों तक बैठने और ठीक होने दें। यह अंतिम चरण पोषक तत्वों को स्थिर करता है और सुनिश्चित करता है कि यह उपयोग के लिए तैयार है।",
+          },
+        },
+        {
+          title: { en: "9. Use & Sell", hi: "९. उपयोग करें और बेचें" },
+          description: {
+            en: "Your compost is ready when it is dark, crumbly, and smells earthy. Apply to your crops and list any surplus on our marketplace!",
+            hi: "आपकी कम्पोस्ट तब तैयार होती है जब वह गहरी, भुरभुरी हो और मिट्टी की तरह महकती हो। अपनी फसलों पर लागू करें और हमारे बाज़ार पर किसी भी अधिशेष को सूचीबद्ध करें!",
+          },
+        },
+      ];
+
+      // --- SDG Impact Data and Logic ---
+      const sdgData = [
+        {
+          goal: 6,
+          title: { en: "Clean Water & Sanitation", hi: "स्वच्छ जल और स्वच्छता" },
+          category: { en: "Environmental", hi: "पर्यावरणीय" },
+          color: "#4C9F38",
+        },
+        {
+          goal: 8,
+          title: {
+            en: "Decent Work & Economic Growth",
+            hi: "सभ्य कार्य और आर्थिक विकास",
+          },
+          category: { en: "Economic", hi: "आर्थिक" },
+          color: "#A21942",
+        },
+        {
+          goal: 9,
+          title: {
+            en: "Industry, Innovation & Infrastructure",
+            hi: "उद्योग, नवाचार और बुनियादी ढाँचा",
+          },
+          category: { en: "Economic", hi: "आर्थिक" },
+          color: "#FD6925",
+        },
+        {
+          goal: 10,
+          title: { en: "Reduced Inequalities", hi: "घटी हुई असमानताएँ" },
+          category: { en: "Social", hi: "सामाजिक" },
+          color: "#DD1367",
+        },
+        {
+          goal: 12,
+          title: {
+            en: "Responsible Consumption & Production",
+            hi: "जिम्मेदार खपत और उत्पादन",
+          },
+          category: { en: "Environmental", hi: "पर्यावरणीय" },
+          color: "#BF8B2E",
+        },
+        {
+          goal: 13,
+          title: { en: "Climate Action", hi: "जलवायु कार्रवाई" },
+          category: { en: "Environmental", hi: "पर्यावरणीय" },
+          color: "#3F7E44",
+        },
+        {
+          goal: 15,
+          title: { en: "Life on Land", hi: "भूमि पर जीवन" },
+          category: { en: "Environmental", hi: "पर्यावरणीय" },
+          color: "#56C02B",
+        },
+        {
+          goal: 17,
+          title: {
+            en: "Partnerships for the Goals",
+            hi: "लक्ष्यों के लिए भागीदारी",
+          },
+          category: { en: "Social", hi: "सामाजिक" },
+          color: "#19486A",
+        },
+      ];
+
+      const sdgCategories = {
+        en: ["All", "Environmental", "Economic", "Social"],
+        hi: ["सभी", "पर्यावरणीय", "आर्थिक", "सामाजिक"],
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const wasteForm = document.getElementById("waste-form");
+        const aiOutput = document.getElementById("ai-output");
+        const processContainer = document.getElementById("process-buttons");
+        const processTitle = document.getElementById("process-title");
+        const processDescription = document.getElementById(
+          "process-description"
+        );
+
+        if (wasteForm) {
+          wasteForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const selectedWastes = Array.from(
+              document.querySelectorAll('input[name="waste"]:checked')
+            ).map((checkbox) => checkbox.value);
+
+            if (selectedWastes.length === 0) {
+              aiOutput.innerHTML = `<p class="text-red-600">${translations[currentLanguage].recipe_select_one}</p>`;
+              return;
+            }
+
+            aiOutput.innerHTML = `<p class="text-gray-500">${translations[currentLanguage].recipe_generating}</p>`;
+            setTimeout(() => {
+              const recipe = generateCompostRecipe(selectedWastes);
+              const careTips = generatePlantCareTips(selectedWastes);
+              aiOutput.innerHTML = `
+                <h4 class="text-xl font-bold text-[#2C5F2D]">${translations[currentLanguage].recipe_custom_recipe_title}</h4>
+                <p class="text-gray-700">${recipe}</p>
+                <h4 class="text-xl font-bold text-[#2C5F2D] mt-4">${translations[currentLanguage].recipe_plant_tips_title}</h4>
+                <p class="text-gray-700">${careTips}</p>
+              `;
+            }, 1200);
+          });
+        }
+
+        processData.forEach((step, index) => {
+          const button = document.createElement("button");
+          button.textContent = step.title[currentLanguage];
+          button.className =
+            "step-btn px-4 py-2 bg-white border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none transition-all shadow-sm";
+          button.addEventListener("click", () => {
+            updateProcessContent(index);
+          });
+          processContainer.appendChild(button);
+        });
+
+        window.updateProcessContent = function (index) {
+          const step = processData[index];
+          processTitle.textContent = step.title[currentLanguage];
+          processDescription.textContent = step.description[currentLanguage];
+          document.querySelectorAll(".step-btn").forEach((btn, i) => {
+            btn.textContent = processData[i].title[currentLanguage]; // update button text on language change
+            btn.classList.toggle("active", i === index);
+          });
+        };
+
+        const sdgFiltersContainer = document.getElementById("sdg-filters");
+        const sdgGrid = document.getElementById("sdg-grid");
+
+        function setupSdgFilters() {
+          sdgFiltersContainer.innerHTML = "";
+          sdgCategories.en.forEach((category, index) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = sdgCategories[currentLanguage][index];
+            button.className = `filter-btn px-4 py-2 text-sm font-medium border-t border-b border-gray-200 ${
+              category === "All"
+                ? "bg-gray-200 text-gray-900"
+                : "bg-white text-gray-900"
+            } hover:bg-gray-100`;
+            if (index === 0) button.classList.add("border-l", "rounded-l-lg");
+            if (index === sdgCategories.en.length - 1)
+              button.classList.add("border-r", "rounded-r-lg");
+
+            button.dataset.category = category;
+            button.addEventListener("click", handleFilterClick);
+            sdgFiltersContainer.appendChild(button);
+          });
+        }
+
+        window.renderSdgCards = function (filter = "All") {
+          setupSdgFilters(); // Redraw filters with correct language
+          sdgGrid.innerHTML = "";
+          const filteredData =
+            filter === "All"
+              ? sdgData
+              : sdgData.filter((d) => d.category.en === filter);
+
+          filteredData.forEach((sdg) => {
+            const card = document.createElement("div");
+            card.className =
+              "sdg-card bg-white p-6 rounded-xl shadow-md border";
+            card.innerHTML = `
+              <div class="flex items-center">
+                  <div class="text-3xl font-extrabold mr-4 p-2 rounded-full" style="color: white; background-color: ${sdg.color};">${sdg.goal}</div>
+                  <div>
+                      <h4 class="text-lg font-semibold text-gray-900">${sdg.title[currentLanguage]}</h4>
+                      <p class="text-sm text-gray-500">${sdg.category[currentLanguage]}</p>
+                  </div>
+              </div>
+            `;
+            sdgGrid.appendChild(card);
+          });
+        };
+
+        const ctx = document.getElementById("sdgImpactChart").getContext("2d");
+        let sdgChart;
+
+        window.createOrUpdateChart = function () {
+          const chartData = {
+            labels: sdgCategories[currentLanguage].slice(1), // All, Env, Eco, Soc -> Env, Eco, Soc
+            datasets: [
+              {
+                label: "Number of SDGs Addressed",
+                data: [0, 0, 0], // FORCED TO ZERO
+                backgroundColor: [
+                  "rgba(44, 95, 45, 0.8)",
+                  "rgba(162, 25, 66, 0.8)",
+                  "rgba(221, 19, 103, 0.8)",
+                ],
+                borderColor: [
+                  "rgb(44, 95, 45)",
+                  "rgb(162, 25, 66)",
+                  "rgb(221, 19, 103)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          };
+
+          const titleText = `${translations[currentLanguage].impact_title} (Activity: 0)`;
+
+          if (sdgChart) {
+            sdgChart.data.labels = chartData.labels;
+            sdgChart.data.datasets = chartData.datasets;
+            sdgChart.options.plugins.title.text = titleText;
+            sdgChart.update();
+          } else {
+            sdgChart = new Chart(ctx, {
+              type: "bar",
+              data: chartData,
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+                plugins: {
+                  legend: { display: false },
+                  title: { display: true, text: titleText },
+                },
+              },
+            });
+          }
+        };
+
+        function handleFilterClick(event) {
+          const filter = event.target.dataset.category;
+          document.querySelectorAll(".filter-btn").forEach((btn) => {
+            btn.classList.remove("bg-gray-200", "text-gray-900");
+            btn.classList.add("bg-white", "text-gray-900");
+          });
+          event.target.classList.add("bg-gray-200");
+          event.target.classList.remove("bg-white");
+          renderSdgCards(filter);
+        }
+
+        // Initial setup on page load
+        const savedLang = localStorage.getItem("krishi-lang") || "en";
+        switchLanguage(savedLang);
+      });
+    </script>
+  </body>
+</html>
