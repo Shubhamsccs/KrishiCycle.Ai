@@ -18,4 +18,4 @@ Participating in this hackathon taught me how to structure a project under time 
 2. Open the folder and launch `index.html` (or the main html file) in your browser.
 
 ---
-*Built by [Shubham S Chauhan](www.linkedin.com/in/shubham-s-chauhan-b19340370) | VIT-Pune*
+*Built by [Shubham S Chauhan](www.linkedin.com/in/shubham-s-chauhan-b19340370/) | VIT-Pune*
